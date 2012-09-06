@@ -1,0 +1,34 @@
+/*********************************************
+ * STATES
+ *********************************************/
+
+.state-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba( 0, 0, 0, 0.15 );
+    opacity: 0.15;
+    filter: alpha(opacity=15);
+
+    -webkit-transition: background 800ms ease;
+       -moz-transition: background 800ms ease;
+        -ms-transition: background 800ms ease;
+         -o-transition: background 800ms ease;
+            transition: background 800ms ease;
+    
+}
+.mbta .state-background {
+    background: url('mbta-budgetcalc.jpg') top center;
+}
+
+.trailmap .state-background {
+    background: url('trailmap.jpg') top center;
+}
+
+.dd .state-background {
+    background: url('dd.jpg') top center;
+}
+
+.bostonparks .state-background {
+    background: url('bostonparks.jpg') top center;
+}

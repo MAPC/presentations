@@ -1,0 +1,224 @@
+<!doctype html>  
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        
+        <title>MAPC Data Services Showcase 2012</title>
+
+        <meta name="description" content="Showing selected MAPC Data Services projects of 2012.">
+        <meta name="author" content="Christian Spanring">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/theme/simple-dark.css" id="theme">
+        <link rel="stylesheet" href="style.css">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+        <script>
+            // If the query includes 'print-pdf' we'll use the PDF print sheet
+            document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="../lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body>
+        
+        <div class="reveal">
+
+            <!-- Used to fade in a background when a specific slide state is reached -->
+            <div class="state-background"></div>
+            
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>MAPC<br>Data Services Showcase 2012</h1>
+                    <h3>What we've been up to lately...</h3>
+                </section>
+                
+                <section data-state="mbta">
+                    <section>
+                        <h2>MBTA Budget Calculator</h2>
+                        <p>Help solve the MBTA budget crisis,</p>
+                        <p>compile and propose a custom MBTA Budget.</p>
+                        <p><a href="http://fixthet.mapc.org">fixtheT.mapc.org</a></p>
+                    </section>
+                    <section>
+                        <h2>Educate</h2>
+                        <p>Break down complex budget items</p>
+                        <p>Explain background and relations</p>
+                    </section>
+                    <section>
+                        <h2>Meet and Debate</h2>
+                        <p>Generate informed discussions</p>
+                        <p>Support conversation in public meetings</p>
+                    </section>
+                    <section>
+                        <h2>Outreach</h2>
+                        <p>Personalized one-click sharing</p>
+                        <p>Facebook &gt; Email &gt; Twitter &gt; Google</p>
+                        <p>Access from anywhere, desktop &amp; mobile</p>
+                    </section>
+                </section>
+
+                <section data-state="trailmap">
+                    <section>
+                        <h2>MAPC Trailmap</h2>
+                        <p>Explore walking and biking facilities</p>
+                        <p>in the Greater Boston Region.</p>
+                        <p><a href="http://trailmap.mapc.org">trailmap.mapc.org</a></p>
+                    </section>
+                    <section>
+                        <h2>Feedback</h2>
+                        <p>Collect user feedback on data quality</p>
+                        <p>Simple map comments</p>
+                    </section>
+                </section>
+                
+                <section data-state="dd">
+                    <section>
+                        <h2>Development Database</h2>
+                        <p>Collect housing and economic development data</p>
+                        <p>to better track the region's growth,</p>
+                        <p>and forecast its future.</p>
+                        <p><a href="http://dd.mapc.org">dd.mapc.org</a></p>
+                    </section>
+                    <section>
+                        <h2>Crowdsource</h2>
+                        <p>Housing and economic development data from:</p>
+                        <ul>
+                            <li>Planners in cities and towns (Phase I)</li>
+                            <li>Other stakeholders in cities and towns (Phase II)</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section data-state="bostonparks">
+                    <section>
+                        <h2>Boston Parks</h2>
+                        <p><small><i>[working title, in development]</i></small></p>
+                        <p>Discover the region's Parks and Green Spaces.</p>
+                        <p><a href="http://bostonparks.mapc.org">bostonparks.mapc.org</a></p>
+                    </section>
+                    <section>
+                        <h2>The Story</h2>
+                        <p>Prototyped in a 48hr hackathon</p>
+                        <p>Mobile first, HTML5 cross platform app</p>
+                        <p>Pitched to interest groups and potential funders</p>
+                        <p>Turned into MAPC project</p>
+                    </section>
+                    <section>
+                        <h2>Hackathons et. al.</h2>
+                        <p>Pool of bleeding edge innovation</p>
+                        <p>World of short attention spans</p>
+                        <p>Plan for the day after</p>
+
+                        <aside class="notes">
+                            Bleeding edge: nothing your staff will be familiar with
+                            you have support for the timeframe hackathon, then it's gone
+                            prevent that the hackathon outcome is dying a slow death 
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Ground Rule #1</h2>
+                        <blockquote>Use the <del>Force</del>Source.</blockquote>
+                        <p><a href="https://github.com/mapc">github.com/mapc</a></p>
+
+                        <aside class="notes">
+                            Don't re-invent the wheel, use what's out there and give back.
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Ground Rule #2</h2>
+                        <blockquote>Use your own data API.</blockquote>
+                        <pre><code contenteditable class="javascript">
+    {
+        "neighborhood": {
+            "list_endpoint": "/api/v1/neighborhood/", 
+            "schema": "/api/v1/neighborhood/schema/"
+        }
+    }
+                        </code></pre>
+                        <p>Open &amp; discoverable</p>
+                        
+                        <aside class="notes">
+                            ...and you'll see how well it works.
+                            Re-use your own data across apps
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Ground Rule #3</h2>
+                        <blockquote>Access from anywhere.</blockquote>
+                        <pre><code contenteditable class="css">
+/* Large desktop */
+@media (min-width: 1200px) { ... }
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { ... }
+                        </code></pre>
+                        <p>Desktop &amp; mobile</p>
+                        <p>Responsive design with HTML5</p>
+
+                        <aside class="notes">
+                            one code base
+                            HTML5 first, native second
+                        </aside>
+                    </section>          
+                </section>
+            </div>
+
+            <!-- The navigational controls UI -->
+            <aside class="controls">
+                <a class="left" href="#">&#x25C4;</a>
+                <a class="right" href="#">&#x25BA;</a>
+                <a class="up" href="#">&#x25B2;</a>
+                <a class="down" href="#">&#x25BC;</a>
+            </aside>
+
+            <!-- Presentation progress bar -->
+            <div class="progress"><span></span></div>
+            
+        </div>
+
+        <script src="../lib/js/head.min.js"></script>
+        <script src="../js/reveal.min.js"></script>
+
+        <script>
+            
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                
+                theme: 'simple-dark', // available themes are in /css/theme
+                transition: 'default', // default/cube/page/concave/linear(2d)
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: '../lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+                    { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '../lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+                    { src: '../plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+                ]
+            });
+            
+        </script>
+
+    </body>
+</html>
