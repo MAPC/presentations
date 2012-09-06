@@ -4,6 +4,6 @@ Contains slides and other materials from MAPC (mostly Data Services related) pre
 
 ## Available Presentations
 
-* [What's Data Services Up To These Days?](http://mapc.github.com/presentations/portfolio-2012/)  
-  A quick run through MAPC Data Services Web Portfolio of 2012.  
+* [MAPC Data Services Showcase 2012 - What's we've been up to lately...](http://mapc.github.com/presentations/showcase-2012/)  
+  A few selected projects out of MAPC Data Services' Web Portfolio 2012.  
   *National Neighborhood Indicators Partnership Meeting (NNIP) in Providence, RI, September 2012*
