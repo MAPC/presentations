@@ -22,11 +22,27 @@
 }
 
 .swfobject .state-background {
-    background: url('swfobject.jpg') top center;
+    background: url('swfobject.png') top center;
 }
 
 .tn .state-background {
     background: url('tn.jpg') top center;
+}
+
+.user-types .state-background {
+    background: url('user-types.jpg') top center;
+}
+
+.monthly-training .state-background {
+    background: url('monthly-training.jpg') top center;
+}
+
+.mbdc-training .state-background {
+    background: url('mbdc-training.jpg') top center;
+}
+
+.trygit .state-background {
+    background: url('trygit.jpg') top center;
 }
 
 
