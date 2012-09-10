@@ -1,0 +1,219 @@
+<!doctype html>  
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        
+        <title>MAPC Weave Integration</title>
+
+        <meta name="description" content="Showing selected key concepts on how MAPC integrates Weave in websites.">
+        <meta name="author" content="Christian Spanring">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/theme/simple-dark.css" id="theme">
+        <link rel="stylesheet" href="style.css">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+        <script>
+            // If the query includes 'print-pdf' we'll use the PDF print sheet
+            document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="../lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body>
+        
+        <div class="reveal">
+
+            <!-- Used to fade in a background when a specific slide state is reached -->
+            <div class="state-background"></div>
+            
+            <!-- Any section element inside of this container is displayed as a slide -->
+
+            <!-- * automatically create thumbnails (JavaScript => Python) -->
+            <!--* turn Thumbnail in place in interactive Weave instance -->
+            <!-- * Weave Django App -->
+            <div class="slides">
+                <section>
+                    <h1>MAPC<br>Weave Integration</h1>
+                    <h3>Key concepts</h3>
+                </section>
+
+                <section data-state="swfobject">
+                    <section>
+                        <h2>Embed Flash using the swfobject library</h2>
+                        <p>Abstracts cross-browser issues</p>
+                        <p>Better control over Flash object</p>
+                        <p><a href="http://code.google.com/p/swfobject/">swfobject</a></p>
+                    </section>
+                    <section>
+                        <h2>How it works</h2>
+                        <pre><code contenteditable class="html">
+&lt;script type="text/javascript" src="/swfobject.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" &gt;
+    // Embed Weave Flash instance
+    swfobject.embedSWF(
+        "/weave.swf", 
+        "weave-container", 
+        "455", "315",
+        "10.0.0", // required min Flash Version
+        "expressInstall.swf", 
+        { // Flash vars 
+            file: "visualization.xml"
+        },               
+        { // Flash parameters
+            quality: "high",
+            base: "/"
+        }, 
+        { // Flash object attributes
+            id: "weave-visualization"
+        }
+    );
+&lt;/script&gt;
+&lt;div id="weave-container"&gt;&lt;/div&gt;
+
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section data-state="save-ss">
+                    <section>
+                        <h2>Save Session State as Database Object</h2>
+                        <p>Better control over Session State object</p>
+                        <p>Store visualization meta information</p>
+                        <p>Add security layer</p>
+                        <p><a href="http://metrobostondatacommon.org/visualizations/1059/">see live</a></p>
+                    </section>
+                    <section>
+                        <h2>How it works</h2>
+                        <pre><code contenteditable class="javascript">
+// POST SessionState using jQuery
+$.post(
+    "/weave/save/", 
+    { 
+        "sessionstate": JSON.stringify(weave.getSessionState([]))
+    }
+);
+                    </code></pre>
+                    <pre><code contenteditable class="python">
+# Django Visualization model class
+class Visualization(models.Model, PermissionLevelMixin):
+    sessionstate = models.TextField()
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section data-state="tn">
+                    <section>
+                        <h2>Automatic Thumbnails</h2>
+                        <p>Multiple Weave visualizations on one page</p>
+                        <p>Accessible without Flash plugin</p>
+                        <p>Print page with visualizations</p>
+                        <p><a href="http://metrobostondatacommon.org/snapshots/cities-and-towns/somerville/">see live</a></p>
+                    </section>
+                    <section>
+                        <h2>How it works</h2>
+                        <pre><code contenteditable class="javascript">
+// Get Base64 representation of visualization
+var base64data = weave.evaluateExpression(
+    null, 
+    'getBase64Image(Application.application.visDesktop)', 
+    null, 
+    ['weave.utils.BitmapUtils', 'mx.core.Application']
+);
+// Send data to server
+$.post(
+    "/weave/save/", 
+    { 
+        "base64data": base64data
+    }
+);
+                        </code></pre>
+                        <pre><code contenteditable class="python">
+# Receive Base64 data and saves it as PNG image on server
+def save_thumbnail(base64data):
+    thumbnail = Image.open(BytesIO(base64.b64decode(base64data)))
+    thumbnail.save('thumbnail.png', 'PNG', optimize=True)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>How it works</h2>
+                        <pre><code contenteditable class="html">
+&lt;!-- Turn static thumbnail into interactive Weave instance --&gt;
+&lt;img class="thumbnail" src="thumbnail.png" alt="visualization" /&gt;
+&lt;script type="text/javascript" &gt;
+    $("img.thumbnail").on("click", function() {
+        // Element containing the thumbnail 
+        // will be our new weave container
+        var weave_container = $(this).parent().attr("id");
+
+        // embed Weave Flash object
+        swfobject.embedSWF(
+            "weave.swf", 
+            weave_container, 
+            ...
+        );
+    })
+    .hover(function() {
+        // Use click cursor on image mouse over
+        $(this).css("cursor", "pointer");
+    });
+&lt;/script&gt;
+                    </code></pre>
+                    </section>
+                </section>
+            </div>
+
+            <!-- The navigational controls UI -->
+            <aside class="controls">
+                <a class="left" href="#">&#x25C4;</a>
+                <a class="right" href="#">&#x25BA;</a>
+                <a class="up" href="#">&#x25B2;</a>
+                <a class="down" href="#">&#x25BC;</a>
+            </aside>
+
+            <!-- Presentation progress bar -->
+            <div class="progress"><span></span></div>
+            
+        </div>
+
+        <script src="../lib/js/head.min.js"></script>
+        <script src="../js/reveal.min.js"></script>
+
+        <script>
+            
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                
+                theme: 'simple-dark', // available themes are in /css/theme
+                transition: 'default', // default/cube/page/concave/linear(2d)
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: '../lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+                    { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '../lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+                    { src: '../plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+                ]
+            });
+            
+        </script>
+
+    </body>
+</html>

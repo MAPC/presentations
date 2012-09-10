@@ -1,0 +1,41 @@
+/*********************************************
+ * STATES
+ *********************************************/
+
+.state-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba( 0, 0, 0, 0.15 );
+    opacity: 0.15;
+    filter: alpha(opacity=15);
+
+    -webkit-transition: background 800ms ease;
+       -moz-transition: background 800ms ease;
+        -ms-transition: background 800ms ease;
+         -o-transition: background 800ms ease;
+            transition: background 800ms ease;
+    
+}
+.save-ss .state-background {
+    background: url('save-ss.jpg') top center;
+}
+
+.swfobject .state-background {
+    background: url('swfobject.jpg') top center;
+}
+
+.tn .state-background {
+    background: url('tn.jpg') top center;
+}
+
+
+/*********************************************
+ * DEFAULT ELEMENT STYLES
+ *********************************************/
+
+
+/*.reveal ul {
+    list-style-type: none;
+    margin: 0px;
+}*/
