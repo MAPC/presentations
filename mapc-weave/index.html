@@ -6,7 +6,7 @@
         
         <title>MAPC Weave Integration</title>
 
-        <meta name="description" content="Showing selected key concepts on how MAPC integrates Weave in websites.">
+        <meta name="description" content="Showing Weave integration aspects regaring website development, data structures and user training.">
         <meta name="author" content="Christian Spanring">
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -39,14 +39,10 @@
             <div class="state-background"></div>
             
             <!-- Any section element inside of this container is displayed as a slide -->
-
-            <!-- * automatically create thumbnails (JavaScript => Python) -->
-            <!--* turn Thumbnail in place in interactive Weave instance -->
-            <!-- * Weave Django App -->
             <div class="slides">
                 <section>
                     <h1>MAPC<br>Weave Integration</h1>
-                    <h3>Key concepts</h3>
+                    <h3>Website, Data &amp; User Community </h3>
                 </section>
 
                 <section data-state="swfobject">
@@ -150,7 +146,7 @@ def save_thumbnail(base64data):
                         <h2>How it works</h2>
                         <pre><code contenteditable class="html">
 &lt;!-- Turn static thumbnail into interactive Weave instance --&gt;
-&lt;img class="thumbnail" src="thumbnail.png" alt="visualization" /&gt;
+&lt;img class="thumbnail" src="thumbnail.png" alt="visualization" &gt;
 &lt;script type="text/javascript" &gt;
     $("img.thumbnail").on("click", function() {
         // Element containing the thumbnail 
@@ -173,6 +169,105 @@ def save_thumbnail(base64data):
                     </section>
                 </section>
 
+                <section data-state="adminconsole">
+                    <section>
+                        <h2>Label Formatter</h2>
+                        <p>Problem: Text is too large for the visualitzation space.</p>
+                        <img src="1_1_Initial.PNG" alt="weave screenshot">
+                    </section>
+                    <section>
+                        <h2>Label Formatter</h2>
+                        <img src="1_2_Barchart_labels.PNG" alt="weave screenshot">
+                        <pre><code contenteditable class="javascript">
+string.split(' ').splice(-1).join(' ')
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Label Formatter</h2>
+                        <img src="1_3_Legend_labels.PNG" alt="weave screenshot">
+                        <pre><code contenteditable class="javascript">
+// shows first and last word
+ a = string.split(' '); a.shift() + ' ' + a.pop()
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Label Formatter</h2>
+                        <p>`% SHI: Feb 2005` &rarr; `Feb 2005`</p>
+                        <pre><code contenteditable class="javascript">
+// displays the last 2 words
+string.split(' ').splice(-2).join(' ')
+
+// shows the last 10 characters
+string.substring(10, (string.length))
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Label Formatter</h2>
+                        <p>Solution: Formatting the text within the visualization to make the best use of limited space</p>
+                        <img src="1_4_Final.PNG" alt="weave screenshot">
+                    </section>
+                </section>
+                <section data-state="adminconsole">
+                    <section>
+                        <h2>Loading Annualized Data</h2>
+                        <p>Problem: Loading data that can be used in an map, bar chart or line chart<p>
+                        <p>Solution: Filtered Column Query</p>
+                        <img src="2_1_SchoolDistricts_FirstLoad.PNG" alt="weave screenshot">
+                    </section>
+                    <section>
+                        <h2>Loading Annualized Data</h2>
+                        <p>Results in extra unecessary rows for the School District ID Name and year.</p>
+                        <p>Removing the extra rows and year references.</p>
+                        <img src="2_2_SchoolDistricts_removingExtraRows.PNG" alt="weave screenshot">
+                    </section>
+                    <section>
+                        <h2>Loading Annualized Data</h2>
+                        <p>Just removing the extraneous rows does isolate the unique values</p>
+                        <img src="2_3_SchoolDistricts_DuplicateError.PNG" alt="weave screenshot">
+                    </section>
+                    <section>
+                        <h2>Loading Annualized Data</h2>
+                        <p>District ID</p>
+                        <img src="2_4_SchoolDistricts.PNG" alt="weave screenshot">
+                    </section>
+                    <section>
+                        <h2>Loading Annualized Data</h2>
+                        <p>District - problem with consistent naming over the years means the distinct command will not work.</p> 
+                        <pre><code contenteditable class="sql">
+<span class="comment">-- Old Query</span>
+SELECT "districtid","districtid" FROM "weave"."district_enrollment_grades_groups_multiyear"
+<span class="comment">-- New Query: </span>
+SELECT distinct "districtid","districtid" FROM "weave"."district_enrollment_grades_groups_multiyear"
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Loading Annualized Data</h2>
+                        <p>Solution: select the distinct name from a separate table containing the unique names</p> 
+                        <pre><code contenteditable class="sql">
+SELECT distinct a."districtid",b."dristrict" 
+FROM "weave"."district_enrollment_grades_groups_multiyear" a, "weave"."school_districts" b 
+where  a."districtid" = b."districtid" ORDER BY a."districtid"
+                        </code></pre>
+                    </section>
+                </section>
+                <section data-state="adminconsole">
+                    <section>
+                        <h2>Data Hierarchy</h2>
+                        <img src="3_Hierarchy.PNG" alt="weave screenshot">
+                    </section>
+                </section>
+                <section data-state="adminconsole">
+                    <section>
+                        <h2>Data Source</h2>
+                        <p>Adding both the title and source will display in the attribute Selector</p>
+                        <img src="4_1_metadata.PNG" alt="weave screenshot">
+                    </section>
+                    <section>
+                        <h2>Data Source</h2>
+                        <img src="4_2_Source.PNG" alt="weave screenshot">
+                    </section>
+                </section>
+
                 <section data-state="user-types">
                     <h2>User Types</h2>
                     <p>DataCommon users range from <br>"savvy technologists" to "reluctant users".</p>
@@ -188,19 +283,21 @@ def save_thumbnail(base64data):
                     </ul>
                 </section>
 
-                <section data-state="mbdc-training">
-                    <h2>Web-based Training</h2>
-                    <p>Video covers beginner and advanced subjects related to Weave and data visualization generally:</p>
-                    <ul>
-                        <li>Introduction to WEAVE</li>
-                        <li>Using the R scripting window</li>
-                        <li>Binning Data</li>
-                    </ul>
-                </section>
+                <section>
+                    <section data-state="mbdc-training">
+                        <h2>Web-based Training</h2>
+                        <p>Video covers beginner and advanced subjects related to Weave and data visualization generally:</p>
+                        <ul>
+                            <li>Introduction to WEAVE</li>
+                            <li>Using the R scripting window</li>
+                            <li>Binning Data</li>
+                        </ul>
+                    </section>
 
-                <section data-state="trygit">
-                    <h2>Learning By Doing</h2>
-                    <p>Let users try and fail and try again</p>
+                    <section data-state="trygit">
+                        <h2>Learning By Doing</h2>
+                        <p>Let users try and fail and try again</p>
+                    </section>
                 </section>
 
             </div>

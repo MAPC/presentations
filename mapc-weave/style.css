@@ -45,6 +45,10 @@
     background: url('trygit.jpg') top center;
 }
 
+.adminconsole .state-background {
+    background: url('adminconsole.png') top center;
+}
+
 
 /*********************************************
  * DEFAULT ELEMENT STYLES
