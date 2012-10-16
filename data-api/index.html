@@ -1,0 +1,297 @@
+<!doctype html>  
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        
+        <title>A Tasty Open Data Pie</title>
+
+        <meta name="description" content="Showing selected MAPC Data Services projects of 2012.">
+        <meta name="author" content="Christian Spanring">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/theme/simple-dark.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+        <script>
+            // If the query includes 'print-pdf' we'll use the PDF print sheet
+            document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="../lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body>
+        
+        <div class="reveal">
+
+            <!-- Used to fade in a background when a specific slide state is reached -->
+            <div class="state-background"></div>
+            
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>A Tasty<br>Open Data<br>Pie</h1>
+                    <h3>Making data accessible with Django and Tastypie</h3>
+                </section>
+                
+                <section>
+                    <section>
+                        <h2>Django Web Framework</h2>
+                        <p>Model - View - Controller (MVC)</p>
+                        <p>Python</p>
+                        <p>Extensible</p>
+                        <p>GeoDjango with PostGIS</p>
+                        <p>...</p>
+                        <p><a href="https://www.djangoproject.com/">Django Docs</a></p>
+                    </section>
+                    <section>
+                        <h2>Django-Tastypie</h2>
+                        <p>API framework for REST-style interface</p>
+                        <p>GET - POST - PUT - PATCH - DELETE</p>
+                        <p>JSON (GeoJSON) and XML serialization</p>
+                        <p>Discoverable</p>
+                        <p>...</p>
+                        <p><em>Turns Django into glorified data store</em></p>
+                        <p><a href="http://django-tastypie.readthedocs.org/en/latest/">Tastypie Docs</a></p>
+                    </section>
+                    <section>
+                        <h2>Educational</h2>
+                        <p>Use your own Open Data API...</p>
+                        <p>...and experience first hand how good or bad it is.</p>
+                    </section>
+                    <section>
+                        <h2>Typical Django Project</h2>
+                        <ol>
+                            <li class="fragment">Define data models (<code>models.py</code>)</li>
+                            <li class="fragment">Write program logic (<code>views.py</code>)</li>
+                            <li class="fragment">Setup router (<code>urls.py</code>)</li>
+                            <li class="fragment">Develop templates (<code>index.html</code>)</li>
+                        </ol>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example:<br>Hubway Data Visualization Challenge</h2>
+                        <p>Access Hubway Station and Trip Data</p>
+                        <p>Control usage with authentication and authorization</p>
+                        <p><a href="http://hubwaydatachallenge.org/data-api/">Hubway Data API</a></p>
+                        <p><a href="https://github.com/MAPC/hubwaychallenge">Code on GitHub</a></p>
+                    </section>
+                    <section>
+                        <h2>1. Data Models</h2>
+                        <pre><code class="python" contenteditable style="margin-top: 20px;">class Station(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    ...
+    point = models.PointField(geography=True)
+    objects = models.GeoManager()
+
+class Trip(models.Model):
+    id = models.IntegerField(primary_key=True)
+    duration = models.IntegerField()
+    start_date = models.DateTimeField()
+    start_station = models.ForeignKey(Station, related_name=...)
+    end_date = models.DateTimeField()
+    end_station = models.ForeignKey(Station, related_name=...)
+    ...</code></pre>
+                    </section>
+                    <section>
+                        <h2>2. API Resource</h2>
+                        <pre><code class="python" contenteditable style="margin-top: 20px;">class StationResource(ModelResource):
+    class Meta:
+        queryset = Station.objects.all()
+        allowed_methods = ['get']
+        cache = SimpleCache()
+        authentication = ApiKeyAuthentication()
+        authorization = DjangoAuthorization()
+        filtering = {
+            'id': ALL,
+            'name': ALL,
+        }
+
+class TripResource(ModelResource):
+    start_station = fields.ToOneField('StationResource')
+    end_station = fields.ToOneField('StationResource')
+    class Meta:
+        queryset = Trip.objects.filter(...)
+        resource_name = 'trip'
+        ...</code></pre>
+                    </section>
+                    <section>
+                        <h2>3. URLS</h2>
+                        <pre><code class="python" contenteditable style="margin-top: 20px;">from tastypie.api import Api
+from hubwaychallenge.api import StationResource, TripResource
+
+v1_api = Api(api_name='v1')
+v1_api.register(StationResource())
+v1_api.register(TripResource())
+urlpatterns = patterns('',
+    ...
+    (r'^api/', include(v1_api.urls)),
+)</code></pre>
+                    </section>
+                    <section>
+                        <h2>Done</h2>
+                        <ol>
+                            <li class="fragment">Define data models (<code>models.py</code>)<em> + API Resources</em></li>
+                            <li class="fragment"><del>Write program logic (<code>views.py</code>)</del></li>
+                            <li class="fragment">Setup router (<code>urls.py</code>)<em> - very simple</em></li>
+                            <li class="fragment">Develop templates (<code>index.html</code>)</li>
+                        </ol>
+                    </section>
+                    <section>
+                        <h2>Discover</h2>
+                        <p><code>/api/v1/?format=json</code></p>
+                        <pre><code class="javascript" contenteditable style="margin-top: 20px;">{
+    "station": {
+        "list_endpoint": "/api/v1/station/",
+        "schema": "/api/v1/station/schema/"
+    },
+    "trip": {
+        "list_endpoint": "/api/v1/trip/",
+        "schema": "/api/v1/trip/schema/"
+    }
+}</code></pre>
+                    </section>
+                    <section>
+                        <h2>Metadata included</h2>
+                        <p><code>/api/v1/station/schema/?format=json</code></p>
+                        <pre><code class="javascript" contenteditable style="margin-top: 20px;">{
+    "allowed_detail_http_methods": [
+        "get"
+    ],
+    "allowed_list_http_methods": [
+        "get"
+    ],
+    "default_format": "application/json",
+    "fields": {
+        "id": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": false,
+            "readonly": false,
+            "type": "integer",
+            "unique": true
+        }
+    },
+    ...
+}</code></pre>
+                    </section>
+                    <section>
+                        <h2>Interact</h2>
+                        <p>Use <a href="https://docs.djangoproject.com/en/1.4/ref/models/querysets/#field-lookups">Django field lookup parameters</a> to query data:</p>
+                        <p><code>/?name__icontains=City Hall</code></p>
+                        <p>Tastypie returns and accepts:</p>
+                        <ul>
+                            <li>resource collection</li>
+                            <li>resource detail</li>
+                            <li>resource sub set</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>GeoJSON enabled</h2>
+                        <p><code>/api/v1/station/71/?format=json</code></p>
+                        <pre><code class="javascript" contenteditable style="margin-top: 20px;">{
+    "id": 71,
+    "point": {
+        "coordinates": [
+            -71.107592999999994,
+            42.383405000000003
+        ],
+        "type": "Point"
+    },
+    ...
+}</code></pre>
+                    </section>
+                    <section>
+                        <h2>Relations</h2>
+                        <p><code>/api/v1/trip/?...&duration__gt=3600</code></p>
+                        <pre><code class="javascript" contenteditable style="margin-top: 20px;">{
+    "meta": {
+        "limit": 100,
+        "next": "/api/v1/trip/...",
+        "offset": 0,
+        "previous": null,
+        "total_count": 29204
+    },
+    "objects": [
+        {
+            "duration": 7353,
+            "end_date": "2011-09-01T01:50:00",
+            "end_station": "/api/v1/station/49/",
+            "id": 43499,
+            "resource_uri": "/api/v1/trip/43499/",
+            "start_date": "2011-08-31T23:47:00",
+            "start_station": "/api/v1/station/49/",
+        },
+        ...
+    ]
+}</code></pre>
+                    </section>
+                    <section>
+                        <h2>Conclusion</h2>
+                        <ul>
+                            <li class="fragment">Great option for integrating data components</li>
+                            <li class="fragment">Very extensible by adding logic to API calls</li>
+                            <li class="fragment">Spatial support in early stage</li>
+                            <li class="fragment">Moves development focus to client (JavaScript)</li>
+                        </ul>
+                    </section>
+                </section>
+            </div>
+
+            <!-- The navigational controls UI -->
+            <aside class="controls">
+                <a class="left" href="#">&#x25C4;</a>
+                <a class="right" href="#">&#x25BA;</a>
+                <a class="up" href="#">&#x25B2;</a>
+                <a class="down" href="#">&#x25BC;</a>
+            </aside>
+
+            <!-- Presentation progress bar -->
+            <div class="progress"><span></span></div>
+            
+        </div>
+
+        <script src="../lib/js/head.min.js"></script>
+        <script src="../js/reveal.min.js"></script>
+
+        <script>
+            
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                
+                theme: 'simple-dark', // available themes are in /css/theme
+                transition: 'default', // default/cube/page/concave/linear(2d)
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: '../lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+                    { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '../lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+                    { src: '../plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+                ]
+            });
+            
+        </script>
+
+    </body>
+</html>
