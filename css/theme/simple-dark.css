@@ -18,6 +18,22 @@ body {
   text-shadow: none;
 }
 
+.reveal .highlight {
+  text-decoration: underline;
+}
+
+.reveal a.twitter-link, .reveal a.twitter-link:hover {
+  background: url('../../img/twitter-white.png') center left no-repeat;
+  background-size: auto 80%;
+  padding-left: 1.2em;
+}
+
+.reveal img.noborder, .reveal img.noborder:hover  {
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
 /*********************************************
  * HEADERS
  *********************************************/
