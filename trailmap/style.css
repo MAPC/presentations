@@ -21,3 +21,49 @@
 .trailmap .state-background {
     background: url('trailmap.jpg') top center;
 }
+
+.reveal .noborder {
+    border: none;
+    box-shadow: none;
+    background: none;
+}
+
+.reveal li.open-source {
+    list-style-image: url('open-source-logo.png');
+}
+
+.reveal p span.open-source {
+    background: url('open-source-logo.png') center left no-repeat;
+    padding-left: 42px;
+}
+
+.reveal ul.no-bullet {
+    list-style-type: none;
+    margin-right: 0px;
+    margin-bottom: 1em;
+}
+
+.reveal li.postgis {
+    background: url('postgis-logo.png') center left no-repeat;
+    padding-left: 32px;
+}
+.reveal li.tilemill {
+    background: url('tilemill-logo.png') center left no-repeat;
+    padding-left: 32px;
+}
+.reveal li.mapnik {
+    background: url('mapnik-logo.png') center left no-repeat;
+    padding-left: 128px;
+}
+.reveal li.aws {
+    background: url('aws-logo.png') center left no-repeat;
+    padding-left: 46px;
+}
+.reveal li.django {
+    background: url('django-logo.png') center left no-repeat;
+    padding-left: 100px;
+}
+.reveal li.leaflet {
+    background: url('leaflet-logo.png') center left no-repeat;
+    padding-left: 118px;
+}

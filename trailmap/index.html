@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>reveal.js - The HTML Presentation Framework</title>
+        <title>Greater Boston Cycling and Walking Map</title>
 
         <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
         <meta name="author" content="Hakim El Hattab">
@@ -39,9 +39,11 @@
                 <section section data-state="trailmap">
                     <h1>MAPC Trailmap</h1>
                     <h3>Greater Boston<br>Cycling and Walking Map</h3>
-                    <h4><a href="http://trailmap.mapc.org/">trailmap.mapc.org</a></h4>
                     <p>
-                        <small>Christian Spanring [<a href="mailto:cspanring@mapc.org">cspanring@mapc.org</a> / <a href="http://twitter.com/cspanring">@cspanring</a>]</small>
+                        <a href="http://trailmap.mapc.org/">trailmap.mapc.org</a>
+                    </p>
+                    <p>
+                        <small>Christian Spanring</small>
                     </p>
                 </section>
 
@@ -49,33 +51,48 @@
                     <section>
                         <h2>Who is MAPC?</h2>
                         <p>
-                            Metropolitan Area Planning Council, Regional Planning Agency, serves 101 Cities and Towns in the Greater Boston Area, Transportation, Data
+                            <q cite="http://mapc.org/about-mapc">The Metropolitan Area Planning Council (MAPC) is a regional planning agency serving the people who live and work in the 101 cities and towns of Metropolitan Boston. Our mission is promoting smart growth principles and regional collaboration.</q>
                         </p>
+                        <p><img class="noborder" width="500" height="250" src="mapc-logo.png" alt="MAPC"></p>
 
                         <aside class="notes">
-                            add logo
+                            departments: transportation and data services
                         </aside>
                     </section>
 
                     <section>
-                        <h2>Why does MAPC create a bicycle and pedestrian map?</h2>
-                        <p>
-                            regional view instead of town-by-town, internal resource, external resource for town planner, advocacy groups and public, Who is our audience? facility map, not inventory or suitability map
-                        </p>
+                        <h2>Why is MAPC working on a cycling and walking map?</h2>
+                        <ul>
+                            <li>Adds regional to existing local views</li>
+                            <li>Creates internal and external work resource</li>
+                            <li>Public information</li>
+                        </ul>
 
                         <aside class="notes">
-                            
+                            facility map
+                            for planners, advocacy groups
                         </aside>
                     </section>
 
                     <section>
                         <h2>Are there any related mapping initiatives?</h2>
-                        <p>
-                            State (MassDOT), Bicycle Network Plan (MassDOT, CTPS, Towns, Consultants)
-                        </p>
-
+                        <ul>
+                            <li>State: road inventory
+                                <ul>
+                                    <li>MassDOT</li>
+                                </ul>
+                            </li>
+                            <li>Bicycle Network Plan
+                                <ul>
+                                    <li>MassDOT</li>
+                                    <li>CTPS/MPO</li>
+                                    <li>Cities &amp; Towns</li>
+                                    <li>Consultants</li>
+                                </ul>
+                            </li>
+                        </ul>
                         <aside class="notes">
-                            
+                            regional networks, connections, categories, color schemes    
                         </aside>
                     </section>
                 </section>
@@ -83,30 +100,67 @@
                 <section section data-state="trailmap">
                     <section>
                         <h2>What steps were involved?</h2>
-                        <ol>
-                            <li>Data Collection</li>
-                            <li>Data Cleaning</li>
-                            <li>Publishing</li>
+                        <ol start="0">
+                            <li class="fragment">Define Goal</li>
+                            <li class="fragment">Data Collection</li>
+                            <li class="fragment">Data Cleaning</li>
+                            <li class="fragment">Map Publishing</li>
                         </ol>
                     </section>
                     <section>
-                        <h2>Data Collection</h2>
-                        <p>
-                            101 towns, varying interests, varying data availability, schemas, quality, format
-                        </p>
-                    </section>
-                    <section>
-                        <h2>Data Cleaning</h2>
-                        <p>
-                            Attributes and classifications – use same categories and color schemes like other initiatives, again, be compatible
-                        </p>
-                    </section>
-                    <section>
-                        <h2>Publishing</h2>
+                        <h2>0. Define Goal</h2>
                         <ul>
-                            <li>Internal data availability – digital work resource for internal staff, GIS maps, analysis</li>
-                            <li>paper map – GIS map => designer => print, updated once a year for Bike Week</li>
-                            <li>online map – external access to internal database</li>
+                            <li>Create a <span class="highlight">facility map</span>, <br>not a suitablity map or an inventory map</li>
+                            <li>Focus on <span class="highlight">regional network</span>, <br>not data completeness or location accuracy.</li>
+                        </ul>
+
+                    </section>
+                    <section>
+                        <h2>1. Data Collection</h2> 
+                        <p>
+                            Expect some data diversity in:
+                        </p>
+                        <ul>
+                            <li>Sources</li>
+                            <li>Interests</li>
+                            <li>Availability</li>
+                            <li>Schemas</li>
+                            <li>Quality</li>
+                            <li>Formats</li>
+                        </ul>
+   
+                        <aside class="notes">
+                            101 Cities &amp; Towns, Trustees, Park groups, OpenStreetMap etc.  
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>2. Data Cleaning</h2>
+                        <ul>
+                            <li>Specify and migrate data into a data schema that effieciently <span class="highlight">supports your goals</span>.</li>
+                            <li>Stay <span class="highlight">compatible</span> to related data collection initiatives and enable data sharing.</li>
+                        </ul>
+
+                        <aside class="notes">
+                            
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>3. Map Publishing</h2>
+                        <ul>
+                            <li>Internal work resource <em>(continous updates)</em>:<br> 
+                                Desktop GIS map</li>
+                            <li>Public paper map <em>(annual updates)</em>:<br>
+                                Desktop GIS map &rarr; Graphic design &rarr; Print</li>
+                            <li>Online map <em>(continous updates)</em>:<br>
+                                Data &rarr; Map rendering &rarr; Web interface</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Resource Ballpark</h2>
+                        <ul>
+                            <li>Ongoing: ~10% FT</li>
+                            <li>Print: ~40hr GIS Analyst, ~30hr Graphic Designer,  ~$3,000 for 5,000 copies</li>
+                            <li>Online: ~60hr Programmer, ~$3 per month for map tile hosting</li>
                         </ul>
                     </section>
 
@@ -116,9 +170,9 @@
                 </section>
 
                 <section section data-state="trailmap">
-                    <h2>What can users do with MAPC's Trailmap?</h2>
+                    <h2>Demo Time!</h2>
                     <p>
-                        Demo time! <br><a href="http://trailmap.mapc.org" target="_blank">trailmap.mapc.org</a>
+                        &rarr; <a href="http://trailmap.mapc.org" target="_blank">trailmap.mapc.org</a>
                     </p>
 
                     <aside class="notes">
@@ -127,41 +181,82 @@
                 </section>
 
                 <section section data-state="trailmap">
-                    <h2>What do I need to know before publishing a map online?</h2>
-                    <p>
-                        data collection (formats, storage), map creation, map hosting, map access (standards), commercial vs. open source tools
-                    </p>
+                    <section>
+                        <h2>What do I need to know to publish a map online?</h2>
+                        <ul>
+                            <li>Data storage: which spatial data storage supports my workflow?</li>
+                            <li>Map rendering: overlay on existing basemap vs. custom map rendering?</li>
+                            <li>Map hosting: map server for real-time rendering vs. static map images?</li>
+                            <li>Available tools: propietary vs. Open Source?</li>
+                        </ul>
 
-                    <aside class="notes">
-                        use what your staff knows best, staff resources are more costly than any software license, pay attention to data lock-in, allow future migrations
-                    </aside>
-                </section>
-                <section section data-state="trailmap">
-                    <h2>What tools are available to publish a map online?</h2>
-                    <p>
-                        commercial tools like ESRI (ArcGIS Server, ArcGIS online) and others, free like Google Maps (Google Fusion Tables) or Open Source (GeoServer, CartoDB, MapBox, Mapnik, etc.)
-                    </p>
-
-                    <aside class="notes">
-                        
-                    </aside>
-                </section>
-
-                <section section data-state="trailmap">
-                    <h2>What is MAPC using?</h2>
-                    <p>
-                        Open Source, PostgreSQL/PostGIS (spatially enabled database) => TileMill for cartography => Mapnik for map rendering => Amazon S3 for map hosting => Leaflet interface for webmap and mobile map, available on GitHub
-                    </p>
-
-                    <aside class="notes">
-                        resources?
-                    </aside>
+                        <aside class="notes">
+                            use what your staff knows best, staff resources are more costly than any software license, pay attention to data lock-in, allow future migrations
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Lessons learned...</h2>
+                        <ul>
+                            <li class="fragment">Re Open Source vs. propietary software debate: <span class="highlight">assess staff capacity</span>. Either leverage knowledge of existing propietary tools and invest in software-licenses or invest in staff capacity building on Open Source tools.</li>
+                            <li class="fragment"><span class="highlight">Prevent data lock-in</span>: some propietary tools prefer propietary data formats, don't go there.</li>
+                            <li class="fragment"><span class="highlight">Custom basemap design</span> pays off in terms of long-term brand recognition.</li>
+                        </ul>
+                    </section>
                 </section>
 
                 <section section data-state="trailmap">
-                    <h2>What is MAPC's Trailmap future?</h2>
+                    <section>
+                        <h2>What tools are available to publish a map online?</h2>
+                        <p>
+                            <small><em>Some package examples, non-exhaustive.</em></small>
+                        </p>
+                        <ul>
+                            <li><a href="http://www.esri.com/">ESRI</a>: ArcGIS Online or ArcGIS Server</li>
+                            <li><a href="https://developers.google.com/maps/">Google Maps</a>: Fusion Tables &amp; Maps API</li>
+                            <li class="open-source"><a href="http://opengeo.org/">OpenGeo</a>: suite for web map publishing</li>
+                            <li class="open-source"><a href="http://cartodb.com/">CartoDB</a>: hosted data storage solution &amp; integrated Google Maps rendering</li>
+                            <li class="open-source"><a href="http://mapbox.com/">MapBox</a>: TileMill, a cartographic design studio, for map rendering &amp; optional integrated map hosting solution</li>
+                            <li>...</li>
+                        </ul>
+                        <p>
+                            <span class="open-source">= Open Source Software</span>
+                        </p>
+
+                        <aside class="notes">
+                            commercial tools like ESRI (ArcGIS Server, ArcGIS online) and others, free like Google Maps (Google Fusion Tables) or Open Source (GeoServer, CartoDB, MapBox, Mapnik, etc.)
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2>What is MAPC using?</h2>
+                        <p>
+                            <small><em>100% Open Source</em></small>
+                        </p>
+                        <ul class="no-bullet">
+                            <li class="postgis"><a href="http://postgis.refractions.net/">PostGIS</a> as spatial data storage</li>
+                            <li class="tilemill"><a href="http://mapbox.com/tilemill/">TileMill</a> for cartographic design</li>
+                            <li class="mapnik"><a href="http://mapnik.org/">Mapnik</a> for map tile rendering</li>
+                            <li class="aws"><a href="http://aws.amazon.com/s3/">Amazon S3</a> for map tile hosting</li>
+                            <li class="django"><a href="http://www.djangoproject.com/">Django</a> as web framework</li>
+                            <li class="leaflet"><a href="http://leafletjs.com/">Leaflet</a> for web map user interface</li>
+                        </ul>
+                        <p>
+                            MAPC Trailmap's source code is available at: <a href="https://github.com/MAPC/trailmap">github.com/MAPC/trailmap</a>
+                        </p>
+
+                        <aside class="notes">
+                            
+                        </aside>
+                    </section>
+                </section>
+
+                <section section data-state="trailmap">
+                    <h2>What is MAPC Trailmap's future?</h2>
                     <p>
-                        Routing (OpenTripPlanner), Mobile app
+                        Add <span class="highlight">routing functionality</span>: OpenTripPlanner (Open Source) is a toolkit for transit, biking and walking directions.
+                    </p>
+                    <p>
+                        Improve <span class="highlight">mobile application</span> with feedback functionality, address search and routing.
                     </p>
 
                     <aside class="notes">
@@ -171,8 +266,25 @@
 
                 <section section data-state="trailmap">
                     <h2>Thank you!</h2>
+                    <h4>
+                        Questions?
+                    </h4>
                     <p>
-                        Contact us! Christian Spanring, David Loutzenheiser
+                        Christian Spanring <br>
+                        <small>
+                            <a href="mailto:cspanring@mapc.org">cspanring@mapc.org</a><br>
+                            <a class="twitter-link" href="http://twitter.com/cspanring">cspanring</a>
+                        </small>
+                    </p>    
+                    <p>
+                        David Loutzenheiser<br>
+                        <small><a href="mailto:dloutzenheiser@mapc.org">dloutzenheiser@mapc.org</a></small>
+                    </p> 
+                    <p>
+                        <a href="http://www.mapc.org"><img class="noborder" width="200" src="mapc-logo.png" alt="MAPC"></a>
+                    </p>
+                    <p>
+                        <a href="http://www.mapc.org">www.mapc.org</a>
                     </p>
 
                     <aside class="notes">
